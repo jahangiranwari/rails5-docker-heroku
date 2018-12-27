@@ -1,24 +1,31 @@
-# README
+# Docker container deployment to Heroku
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sample Rails 5 project to demonstrate deployment of a Docker container to Heroku using `heroku.yml` and `git push heroku master`
 
-Things you may want to cover:
+### Development setup
+```
+$ docker-compose build
+$ docker-compose run --rm web rails db:create
+$ docker-compose up
+```
 
-* Ruby version
+### Deploy to Heroku
 
-* System dependencies
+```
+$ heroku update beta
+$ heroku plugins:install @heroku-cli/plugin-manifest
+$ heroku apps:create --manifest
+$ heroku addons:create heroku-postgresql:hobby-dev
 
-* Configuration
+$ heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
+$ heroku config:set RACK_ENV=production RAILS_ENV=production
+$ heroku config:set RAILS_SERVE_STATIC_FILES=enabled
+$ heroku config:set WEB_CONCURRENCY=2
+$ heroku config:set LANG=en_US.UTF-8
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+$ heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
+$ heroku config:set RACK_ENV=production RAILS_ENV=production
+$ heroku config:set RAILS_SERVE_STATIC_FILES=enabled
+$ heroku config:set WEB_CONCURRENCY=2
+$ heroku config:set LANG=en_US.UTF-8
+```
