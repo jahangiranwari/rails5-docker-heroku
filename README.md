@@ -23,9 +23,7 @@ $ heroku config:set RAILS_SERVE_STATIC_FILES=enabled
 $ heroku config:set WEB_CONCURRENCY=2
 $ heroku config:set LANG=en_US.UTF-8
 
-$ heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
-$ heroku config:set RACK_ENV=production RAILS_ENV=production
-$ heroku config:set RAILS_SERVE_STATIC_FILES=enabled
-$ heroku config:set WEB_CONCURRENCY=2
-$ heroku config:set LANG=en_US.UTF-8
+$ git push heroku master
+$ heroku run rails --trace db:migrate
+$ heroku open
 ```
